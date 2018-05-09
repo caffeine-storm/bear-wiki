@@ -26,19 +26,21 @@
 
 ## Tasks rating in languages
 
-| Feature             | C/C++ | Rust | Python |
-| ------------------- | -----:| ----:| ------:|
-| comp. dyn. lib      |    ++ |   ++ |      - |
-| comp. static.exe    |    ++ |   ++ |      - |
-| comp. conditional   |    ++ |    ? |      - |
-| call libc           |    ++ |    + |      - |
-| impl. vararg        |    ++ |    - |      - |
-| no mem. allocation  |    ++ |    + |      - |
-| temp. read/write    |     + |    + |     ++ |
-| env. read/write     |     + |    + |     ++ |
-| JSON read/write     |     - |   ++ |     ++ |
-| RDF read/write      |     - |    + |      + |
-| network read/write  |     + |    ? |      - |
+| Feature              | C/C++ | Rust | Python | `libear` | `wrapper` | `pear` | `bear` |
+| -------------------- | -----:| ----:| ------:| --------:| ---------:| ------:| ------:|
+| comp. dyn. lib       |    ++ |   ++ |      - |        x |           |        |        |
+| comp. static.exe     |    ++ |   ++ |      - |          |           |      x |        |
+| comp. conditional    |    ++ |    ? |      - |        x |           |        |        |
+| c.lang call libc     |    ++ |    + |      - |        x |         x |      x |        |
+| c.lang impl. vararg  |    ++ |    - |      - |        x |           |        |        |
+| no allocation        |    ++ |    + |      - |        x |           |        |        |
+| char encode          |     + |    + |      + |          |           |      x |        |
+| signal handling      |    ++ |    ? |      + |          |           |      x |      x |
+| temp. read/write     |     + |    + |     ++ |          |           |      x |      x |
+| env. read/write      |     + |    + |     ++ |        x |         x |      x |      x |
+| JSON read/write      |     - |   ++ |     ++ |          |           |      x |      x |
+| RDF read/write       |     - |    + |     ++ |          |           |      x |        |
+| network read/write   |     + |    ? |      - |          |           |      x |      x |
 
 ## Things to consider
 
