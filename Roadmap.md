@@ -4,8 +4,8 @@ Read from bottom up if you want to get full picture how it works. Read normally 
 
 Summary:
 
-* Uses C++14 or C++17 dialect
-* Uses meson
+* Uses language: not decided
+* Uses build system: not decided
 
 Use ontology format as output. While compilation databases are good for tools which are based on Clang tooling library, found that this is not the only usage scenario. People often use this tool to get insights about their product build process. (Especially when it is complex and the project is big.)
 
@@ -24,7 +24,7 @@ One of these use cases could be:
 
 Summary:
 
-* Uses C++14 or C++17 dialect and Python
+* Uses C++17 dialect and Python
 * Still uses CMake
 
 Major change the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it execute a wrapper process `pear` which does all these. The motivation behind it is to reduce the complexity of `libear`. (Do not allocate memory during the exec calls, because it might be not safe. Do not try to encode the received parameters, remove potential failures. Does not use any symbol from any libraries except the dynamic loader library.)
