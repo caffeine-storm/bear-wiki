@@ -1,3 +1,5 @@
+This page describes the config file format for version 3.1 and onward.
+
 # Location
 
 Will search for these files:
