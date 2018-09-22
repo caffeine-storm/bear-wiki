@@ -4,8 +4,8 @@ Read from bottom up if you want to get full picture how it works. Read normally 
 
 Summary:
 
-* Uses language: not decided
-* Uses build system: not decided
+* Uses language: rust
+* Uses build system: cargo
 
 Use ontology format as output. While compilation databases are good for tools which are based on Clang tooling library, found that this is not the only usage scenario. People often use this tool to get insights about their product build process. (Especially when it is complex and the project is big.)
 
