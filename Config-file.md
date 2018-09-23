@@ -6,8 +6,8 @@ Will search for these files:
 
 * the explicitly given command line `--config=PATH_TO_FILE`,
 * the `BEAR_CONFIG` environment pointed location,
-* the current directory as`./.bear.yaml`,
-* the user home directory as `~/.bear.yaml`.
+* the current directory as`./bear.conf`,
+* the user home directory as `~/.config/bear.conf`.
 
 When you are unsure what config it reads, just add `--config-dump` at the end of the options and it will dump the content.
 
