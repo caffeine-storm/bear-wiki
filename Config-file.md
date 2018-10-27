@@ -42,7 +42,7 @@ The output of the compilation database is defined. But the same compilation can 
 * The file and directory paths can be absolute or relative to the project root.
 * The output can contains only the C/C++ source files, but it can also contains the header files too.
 * The commands can be rendered as a single shell`command` (string) or the list of `arguments` (array).
-* The entry of the database may contain the output file name too. 
+* The entry of the database may contain the compilation output file name too. 
 
 ```yaml
 output:
@@ -92,6 +92,7 @@ compiler:
       - ccache
   phases:
     - compilation
+    - link
   flags:
     "-MD": 0
     "-MMD": 0
