@@ -5,8 +5,6 @@ This page describes the config file format for version 3.1 and onward.
 Will search for these files:
 
 * the explicitly given command line `--config=PATH_TO_FILE`,
-* the `BEAR_CONFIG` environment pointed location,
-* the current directory as`./bear.conf`,
 * the user home directory as `~/.config/bear.conf`.
 
 When you are unsure what config it reads, just add `--config-dump` at the end of the options and it will dump the content.
@@ -27,12 +25,9 @@ Intercepting command executions can be done many ways. Each has its own limitati
 
 * Using **ptrace** functions. Can be very slow. Might not work within containers. (Available in 3.2)
 
-The interception output can be appended to earlier run. This way multiple build phases can be seen as a single execution.
-
 ```yaml
 intercept:
   mode: preload
-  append: false
 ```
 
 ## Output
@@ -42,14 +37,16 @@ The output of the compilation database is defined. But the same compilation can 
 * The file and directory paths can be absolute or relative to the project root.
 * The output can contains only the C/C++ source files, but it can also contains the header files too.
 * The commands can be rendered as a single shell`command` (string) or the list of `arguments` (array).
-* The entry of the database may contain the compilation output file name too. 
+* The entry of the database may contain the compilation output file name too.
+* The interception output can be appended to earlier run. This way multiple build phases can be seen as a single execution.
 
 ```yaml
 output:
-  relative: "/path/to/project/sources"
+  relative_to: "/path/to/project/sources"
+  command_format: array
   headers: false
-  command: array
   output: false
+  append: true
 ```
 
 ## Sources
