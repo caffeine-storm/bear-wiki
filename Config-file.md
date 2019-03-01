@@ -35,43 +35,34 @@ intercept:
 The output of the compilation database is defined. But the same compilation can be represented many different ways.
 
 * The file and directory paths can be absolute or relative to the project root.
-* The output can contains only the C/C++ source files, but it can also contains the header files too.
-* The commands can be rendered as a single shell`command` (string) or the list of `arguments` (array).
-* The entry of the database may contain the compilation output file name too.
-* The interception output can be appended to earlier run. This way multiple build phases can be seen as a single execution.
+* The commands can be rendered as a single shell `command` (string) or the list of `arguments` (array).
+* The entry of the database may contain the compilation output file name.
+* The entry of the database may be with the original compiler wrapper or without it.
 
 ```yaml
 output:
   relative_to: "/path/to/project/sources"
-  command_format: array
-  headers: false
-  output: false
-  append: true
+  command_as_array: true
+  drop_output_field: false
+  drop_wrapper: true
 ```
 
-## Sources
-
-To identify the sources can be done by its file name extensions or the location of the files.
-
-* `sources.extensions` is a list of file name extension which will be considered as source file.
-* `sources.paths` is a list of directories where any file having such prefix will be considered as source file.
+## Strategy
 
 ```yaml
-sources:
-  extensions:
-    - ".c"
-    - ".cc"
-  paths:
-    - "/path/to/source/dir"
+strategy:
+  append_to_existing: false
+  include_headers: false
+  include_linking: false
+  compilers: ..
+  sources: ..
+  flags: ..
 ```
 
 ## Compiler
 
-* `compiler.phases` is a list of the compilation phases (`preproc`, `compilation`, `link`) which shall be included in the result.
-* `compiler.flags` is a map of the flags which shall be left out from the output. The key of the map is the flag name, the value is how many following arguments shall be removed. (eg.: `"-MD": 0` means that only the `-MD` argument will be removed. While `"-MF": 1` means that `-MF` and the following `/path/source.c.d` will be removed.)
-
 ```yaml
-compiler:
+compilers:
   languages:
     c++:
       - g++
@@ -87,10 +78,30 @@ compiler:
     wrapper:
       - distcc
       - ccache
-  phases:
-    - compilation
-    - link
+```
+
+## Sources
+
+To identify the sources can be done by its file name extensions or the location of the files.
+
+```yaml
+sources:
+  extensions_to_exclude:
+    - ".o"
+  extensions_to_include:
+    - ".c"
+    - ".cc"
+  paths_to_exclude:
+    - "/path/to/build/dir"
+  paths_to_include:
+    - "/path/to/source/dir"
+```
+
+## Flags
+
+```yaml
   flags:
-    "-MD": 0
-    "-MMD": 0
+    to_exclude:
+      "-MD": 0
+      "-MMD": 0
 ```
