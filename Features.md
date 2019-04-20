@@ -9,13 +9,13 @@ The problem with the single string, that it needs to be shell escaped. This is n
 While early versions were emitting the `command`, since version 2.x it does only the `arguments`.
 
 * Both format needs to be read. (since ...)
-* Both format can be written. (plan 3.x)
+* Both format can be written. (plan ...)
 
 ## Output attribute (JSON CDB)
 
 The JSON compilation database specification mentions an optional `output` field, which names the compiler output.
 
-* Output filed is present. (plan 3.x)
+* Output filed is present. (plan ...)
 
 ## Append to existing (JSPN CDB)
 
@@ -44,7 +44,7 @@ Since the output contains compiler calls, it does matter which program will be d
   * Support Open MPI wrappers (since ...)
   * Support MPICH wrappers (since ...)
   * Support `dictcc` wrappers (since ...)
-  * Support `ccatch` wrappers (since ...)
+  * Support `ccache` wrappers (since ...)
   * Support GNU libtool wrappers (planed ...)
   * Support CUDA wrappers (planed ...)
 
@@ -88,6 +88,12 @@ Some compiler call might look linking, but it might involve compilations too.
 The interception phase collects all command which it was able to intercept into a temporary folder. This might be problematic for some use cases. Alternatively it can use IPC to send this information to the supervisor process. (This is how version 1.x was doing.)
 
 * Avoid to use not specified resources (planed ...)
+
+## Support multilib builds
+
+On intel 64 bits machines OSes are supporting to run 32 bits binaries. When a machine hosts 32 and 64 bits libraries are called multilib. Build processes can use these mixed software libraries in many different ways. (Eg.: only the compiler is a 32 bit binary. or part of the build chain is a 32 bit binary, but the compiler itself is a 64 bit binary. etc...)
+
+* Support multilib builds (planed ...)
 
 ## Support MS Windows
 
