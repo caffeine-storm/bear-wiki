@@ -8,7 +8,7 @@ The problem with the single string, that it needs to be shell escaped. This is n
 
 While early versions were emitting the `command`, since version 2.x it does only the `arguments`.
 
-* Both format needs to be read. (since ...)
+* Both format needs to be read. (since 2.3.0)
 * Both format can be written. (plan ...)
 
 ## Output attribute (JSON CDB)
@@ -25,7 +25,7 @@ One of the difficulties here is, how to invalidate entries if they are no longer
 
 Another corner case of entry validation, when the build commands are changing it will generate duplicated entries. There is not known algorithm to detect if this is an intended duplicate, or it's caused by the build system change. This limitation is documented, but got ticket about it.
 
-* Append to existing output (since ...)
+* Append to existing output (since 2.0.0)
 
 ## Append to update (JSON CDB)
 
@@ -37,14 +37,14 @@ Extending the append functionality, the update should not only insert new entrie
 
 Since the output contains compiler calls, it does matter which program will be detected as compiler. Simple cases like `clang` or `gcc` were implemented in early versions. The recognized compilers list was extended later with: not common compilers, compiler wrappers, cross compilers, etc..
 
-* Support major compilers (since ...)
-* Support cross compilers (since ...)
-* Allow to insert compilers (since ...)
+* Support major compilers (since 0.3)
+* Support cross compilers (since 1.4.2)
+* Allow to insert compilers (since 2.3.0)
 * Support compiler wrappers
-  * Support Open MPI wrappers (since ...)
-  * Support MPICH wrappers (since ...)
-  * Support `dictcc` wrappers (since ...)
-  * Support `ccache` wrappers (since ...)
+  * Support Open MPI wrappers (since 2.3.7)
+  * Support MPICH wrappers (since 2.3.7)
+  * Support `dictcc` wrappers (since 2.3.7)
+  * Support `ccache` wrappers (since 2.3.7)
   * Support GNU libtool wrappers (planed ...)
   * Support CUDA wrappers (planed ...)
 
@@ -52,13 +52,13 @@ Since the output contains compiler calls, it does matter which program will be d
 
 Not all compiler filter is relevant. The best example of the `-MD` preprocessor flag "family". Which might be used in a way that cause duplicate entries in the output. (Eg.: a file is compiled with and without it. The first one is used by the build system to track dependencies. The second is the real compilation.)
 
-* Filter flags to avoid duplicate entries (since ...)
+* Filter flags to avoid duplicate entries (since 2.1.0)
 
 ## Compiler names (JSON CDB)
 
 Some tools are sensitive how the compiler is named in the JSON compilation database.
 
-* Use the current compiler as is (since ...)
+* Use the current compiler as is (since 2.3.12)
 * Use the current compiler with full path (planed ...)
 * Substitute the recognized compiler with a generic one (planed ...)
 
@@ -67,7 +67,7 @@ Some tools are sensitive how the compiler is named in the JSON compilation datab
 Recognize the part of the compiler call which refer to something on the filesystem and transform their values.
 
 * Use the current values as is (planed ...)
-* Try to use relative values (partially since ..., planed ...)
+* Try to use relative values (partially since 2.3.0, planed ...)
 * Try to use absolute values (planed ...)
 
 ## Include headers (JSON CDB)
@@ -85,7 +85,7 @@ Some compiler call might look linking, but it might involve compilations too.
 
 ## Don't use temporary folder
 
-The interception phase collects all command which it was able to intercept into a temporary folder. This might be problematic for some use cases. Alternatively it can use IPC to send this information to the supervisor process. (This is how version 1.x was doing.)
+The interception phase collects all command which it was able to intercept into a temporary folder. This might be problematic for some use cases. Alternatively it can use IPC to send this information to the supervisor process. (This is how before version 0.5 was.)
 
 * Avoid to use not specified resources (planed ...)
 
@@ -93,7 +93,13 @@ The interception phase collects all command which it was able to intercept into 
 
 On intel 64 bits machines OSes are supporting to run 32 bits binaries. When a machine hosts 32 and 64 bits libraries are called multilib. Build processes can use these mixed software libraries in many different ways. (Eg.: only the compiler is a 32 bit binary. or part of the build chain is a 32 bit binary, but the compiler itself is a 64 bit binary. etc...)
 
-* Support multilib builds (planed ...)
+* Support multilib builds (partial since 2.3.2, planed ...)
+
+## Support multiple character encoding
+
+Although it's not a common pattern, but some build is using non ascii characters as arguments for the compiler. This might cause problems to serialize into the output or just pass around within the process.
+
+* Support multiple character encoding (partial since 2.3.0, planed ...)
 
 ## Support MS Windows
 
