@@ -47,3 +47,60 @@ Since the output contains compiler calls, it does matter which program will be d
   * Support `ccatch` wrappers (since ...)
   * Support GNU libtool wrappers (planed ...)
   * Support CUDA wrappers (planed ...)
+
+## Filter flags (JSON CDB)
+
+Not all compiler filter is relevant. The best example of the `-MD` preprocessor flag "family". Which might be used in a way that cause duplicate entries in the output. (Eg.: a file is compiled with and without it. The first one is used by the build system to track dependencies. The second is the real compilation.)
+
+* Filter flags to avoid duplicate entries (since ...)
+
+## Compiler names (JSON CDB)
+
+Some tools are sensitive how the compiler is named in the JSON compilation database.
+
+* Use the current compiler as is (since ...)
+* Use the current compiler with full path (planed ...)
+* Substitute the recognized compiler with a generic one (planed ...)
+
+## Paths (JSON CDB)
+
+Recognize the part of the compiler call which refer to something on the filesystem and transform their values.
+
+* Use the current values as is (planed ...)
+* Try to use relative values (partially since ..., planed ...)
+* Try to use absolute values (planed ...)
+
+## Include headers (JSON CDB)
+
+[CompDb](https://github.com/Sarcasm/compdb#generate-a-compilation-database-with-header-files) does this.
+
+* Emit include files (planed ...)
+
+## Include linking (JSON CDB)
+
+Some compiler call might look linking, but it might involve compilations too.
+
+* Include linker calls which does compilation (partially since ..., planed ...)
+* Include linker calls (planed ???)
+
+## Don't use temporary folder
+
+The interception phase collects all command which it was able to intercept into a temporary folder. This might be problematic for some use cases. Alternatively it can use IPC to send this information to the supervisor process. (This is how version 1.x was doing.)
+
+* Avoid to use not specified resources (planed ...)
+
+## Support MS Windows
+
+Have seen PR with MinGW (to use the same library preload trick), but this can be extended for other "normal" users too.
+
+* Support MS Windows (planed ...)
+
+## Support MaxOS
+
+Newer version of MacOS is locked down with security features. Might require to re-think the intercept mode to satisfy this.
+
+* Support MacOS (partially since 1.0, planed ...)
+
+## Support Fortran compilers (JSON CDB)
+
+Issue #241 (planed ...)
