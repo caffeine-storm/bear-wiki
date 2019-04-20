@@ -95,7 +95,7 @@ Have seen PR with MinGW (to use the same library preload trick), but this can be
 
 * Support MS Windows (planed ...)
 
-## Support MaxOS
+## Support MacOS
 
 Newer version of MacOS is locked down with security features. Might require to re-think the intercept mode to satisfy this.
 
@@ -104,3 +104,12 @@ Newer version of MacOS is locked down with security features. Might require to r
 ## Support Fortran compilers (JSON CDB)
 
 Issue #241 (planed ...)
+
+## Support ontology output
+
+Emit the intercepted command with extra informations.
+
+* Exit status included (planed ...)
+* Time information included (planed ...)
+* Parent PID included (planed ...)
+* Enrich the commands with classifications (planed ...)
