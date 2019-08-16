@@ -15,7 +15,7 @@ While early versions were emitting the `command`, since version 2.x it does only
 
 The JSON compilation database specification mentions an optional `output` field, which names the compiler output.
 
-* Output filed is present. (plan ...)
+* Output filed is present. (since 2.4.2)
 
 ## Append to existing (JSPN CDB)
 
@@ -115,7 +115,7 @@ Newer version of MacOS is locked down with security features. Might require to r
 
 ## Support Fortran compilers (JSON CDB)
 
-Issue #241 (planed ...)
+Issue #241 (since 2.4.2)
 
 ## Support ontology output
 
