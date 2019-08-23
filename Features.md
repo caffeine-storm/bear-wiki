@@ -39,6 +39,7 @@ Since the output contains compiler calls, it does matter which program will be d
 
 * Support major compilers (since 0.3)
 * Support cross compilers (since 1.4.2)
+* Support fortran compilers (since 2.4.2)
 * Allow to insert compilers (since 2.3.0)
 * Support compiler wrappers
   * Support Open MPI wrappers (since 2.3.7)
@@ -53,6 +54,12 @@ Since the output contains compiler calls, it does matter which program will be d
 Not all compiler filter is relevant. The best example of the `-MD` preprocessor flag "family". Which might be used in a way that cause duplicate entries in the output. (Eg.: a file is compiled with and without it. The first one is used by the build system to track dependencies. The second is the real compilation.)
 
 * Filter flags to avoid duplicate entries (since 2.1.0)
+
+## Filter entries by source directory (JSON CDB)
+
+Not all compilation entries are relvant. Users might want to exclude certain source files from the output. They can provide multiple directory names to exclude (or explicitly include) in the output.
+
+* Support to exclude/include entries (since 2.4.2)
 
 ## Compiler names (JSON CDB)
 
