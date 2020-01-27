@@ -47,7 +47,7 @@ Since the output contains compiler calls, it does matter which program will be d
   * Support `dictcc` wrappers (since 2.3.7)
   * Support `ccache` wrappers (since 2.3.7)
   * Support GNU libtool wrappers (planed ...)
-  * Support CUDA wrappers (planed ...)
+  * Support CUDA wrappers (since 2.4.3)
 
 ## Filter flags (JSON CDB)
 
