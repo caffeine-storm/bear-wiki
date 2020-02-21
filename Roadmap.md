@@ -1,6 +1,6 @@
 Read from bottom up if you want to get full picture how it works. Read normally if you want to know what's coming.
 
-# 3.x Build semantics
+# 3.x Build semantics (feasibility check)
 
 Summary:
 
@@ -20,11 +20,11 @@ One of these use cases could be:
   * of symbols defined in projects,
   * to see symbols usages in cross projects.
 
-# 3.0 Bear in C++
+# 3.0 Bear in C++ (in progress)
 
 Summary:
 
-* Uses C++17 dialect and Python
+* Uses C++14 dialect (or C++17) and Python
 * Still uses CMake
 
 Major change the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it execute a wrapper process `pear` which does all these. The motivation behind it is to reduce the complexity of `libear`. (Do not allocate memory during the exec calls, because it might be not safe. Do not try to encode the received parameters, remove potential failures. Does not use any symbol from any libraries except the dynamic loader library.)
