@@ -1,3 +1,4 @@
+* [Home](https://github.com/rizsotto/Bear/wiki)
 * [Usage](https://github.com/rizsotto/Bear/wiki/Usage)
 * Project
   * [Roadmap](https://github.com/rizsotto/Bear/wiki/Roadmap)
