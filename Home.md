@@ -1,13 +1,22 @@
-Bear is a tool intended to intercept command execution of a software build process.
+Bear is a project, which includes multiple tools, to create insights of a software build process.
 
-## Usage pages:
+The primary tool of this project is also called `bear`, which generates [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) from the intercepted commands. Other tools of the project are aiming to give more generic information about the build process.
 
-* Cross compilers
-* Multilib (mixed 32bit and 64bit compilations)
-* Compiler wrappers (ccache, distcc, mpi, etc..)
+## Bear usage pages:
 
-## Development pages:
+* [Cross compilers](https://github.com/rizsotto/Bear/wiki/Usage#cross-compilers)
+* [Multilib](https://github.com/rizsotto/Bear/wiki/Usage#multilib-issues) (mixed 32bit and 64bit compilations)
+* [Compiler wrappers](https://github.com/rizsotto/Bear/wiki/Usage#compiler-wrappers) (ccache, distcc, mpi, etc..)
+* [OS specific notes](https://github.com/rizsotto/Bear/wiki/Usage#os-support)
+* [Build tool specific notes](https://github.com/rizsotto/Bear/wiki/Usage#build-tools)
 
-* [Roadmap](https://github.com/rizsotto/Bear/wiki/Roadmap)
+## Project pages:
+
+* [Roadmap](https://github.com/rizsotto/Bear/wiki/Roadmap) is a high level description of the functionalities implemented in past and future versions.
+* [Features](https://github.com/rizsotto/Bear/wiki/Features) is a summary of the existing and planned features.
 * Contribution guidelines
 
+## Developer pages:
+
+* Research page about the [programming language](https://github.com/rizsotto/Bear/wiki/Which-language%3F) to implement the tools.
+* Research page about to use a [config file](https://github.com/rizsotto/Bear/wiki/Config-file) for `bear`.
