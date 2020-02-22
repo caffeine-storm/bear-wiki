@@ -15,6 +15,7 @@ The primary tool of this project is also called `bear`, which generates [JSON co
 * [Roadmap](https://github.com/rizsotto/Bear/wiki/Roadmap) is a high level description of the functionalities implemented in past and future versions.
 * [Features](https://github.com/rizsotto/Bear/wiki/Features) is a summary of the existing and planned features.
 * Contribution guidelines
+* [Release process](https://github.com/rizsotto/Bear/wiki/Release-process)
 
 ## Developer pages:
 
