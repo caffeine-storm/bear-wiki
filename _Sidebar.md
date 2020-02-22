@@ -4,6 +4,7 @@
   * [Roadmap](https://github.com/rizsotto/Bear/wiki/Roadmap)
   * [Features](https://github.com/rizsotto/Bear/wiki/Features)
   * Contribution
+  * [Release process](https://github.com/rizsotto/Bear/wiki/Release-process)
 * Development
   * [language](https://github.com/rizsotto/Bear/wiki/Which-language%3F) spike
   * [config](https://github.com/rizsotto/Bear/wiki/Config-file) spike
