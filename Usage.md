@@ -19,7 +19,7 @@ It implies if your build breaks and the build process stops. The output will con
 
 # Cross Compilers
 
-Cross compilers should work with Bear. If Bear works with a native compiler then it should with a cross compiler too. The only catch is that Bear not know the compiler name to recognize it, so you need to explicitly pass the compiler names. (See `--use-cc`, `--use-c++` or `--use-only` flags in the help or in the manual page for more.)
+Cross compilers should work with Bear. If Bear works with a native compiler then it should work with a cross compiler too. The only catch is that Bear does not know the compiler name to recognize it, so you need to explicitly pass the compiler names. (See `--use-cc`, `--use-c++` or `--use-only` flags in the help or in the manual page for more.)
 
 # Multilib Issues
 
@@ -27,10 +27,10 @@ Multilib is one of the solutions allowing users to run applications built for va
 
 For OSX this is not an issue. The build commands from previous section will work, Bear will intercept compiler calls for 32-bit and 64-bit applications.
 
-For Linux, a small tune is needed at build time. Need to compile `libear.so`/`libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. And replace the `libear.so`/`libexec.so` path default value with a single path, which matches both. (The match can be achieved by
+For Linux, a small tune is needed at build time. Need to compile `libear.so`/`libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. And replace the `libear.so`/`libexec.so` path default value with a single path, that matches both. (The match can be achieved by
 the `$LIB` token expansion from the dynamic loader. See `man ld.so` for more.)
 
-Debian derivatives are using `lib/i386-linux-gnu` and `lib/x86_64-linux-gnu`, while many other distributions are simple `lib` and `lib64`. Here comes an example build script to install a multilib capable Bear. It will install Bear under `/opt/bear` on a non Debian system.
+Debian derivatives are using `lib/i386-linux-gnu` and `lib/x86_64-linux-gnu`, while many other distributions are simple `lib` and `lib64` directories. Here comes an example build script to install a multilib capable Bear. It will install Bear under `/opt/bear` on a non Debian system.
 
     (cd ~/build32; cmake "$BEAR_SOURCE_DIR" -DCMAKE_C_COMPILER_ARG1="-m32"; VERBOSE=1 make all;)
     (cd ~/build64; cmake "$BEAR_SOURCE_DIR" -DCMAKE_C_COMPILER_ARG1="-m64" -DDEFAULT_PRELOAD_FILE='/opt/bear/$LIB/libear.so'; VERBOSE=1 make all;)
@@ -38,14 +38,14 @@ Debian derivatives are using `lib/i386-linux-gnu` and `lib/x86_64-linux-gnu`, wh
     sudo install -m 0644 ~/build64/libear/libear.so /opt/bear/lib64/libear.so
     sudo install -m 0555 ~/build64/bear/bear" /opt/bear/bin/bear
 
-To check you installation, install `lit` and run the test suite.
+To check your installation, install `lit` and run the test suite.
 
     PATH=/opt/bear/bin:$PATH lit -v test
     PATH=/opt/bear/bin:$PATH lit -v test -DMULTILIB=true
 
 # Compiler Wrappers
 
-Compiler wrappers are programs which are pretending to be a compiler and are calling a real C/C++ compiler but with different command line arguments. (The challenge here is to output either the wrapper call or the real compiler call, but not both.)
+Compiler wrappers are programs which are behaving like a compiler and are executing a real C/C++ compiler. The real compiler might be called with different command line arguments. (The challenge here is to output either the wrapper call or the real compiler call, but not both.)
 
 The supported/recognized wrappers are:
 
