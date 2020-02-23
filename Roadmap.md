@@ -27,16 +27,16 @@ Summary:
 * Written in C++14 dialect (or C++17) and Python
 * Build system: CMake
 
-Major change the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it execute a wrapper process `pear` which does all these. The motivation behind it is to reduce the complexity of `libear`. (Do not allocate memory during the exec calls, because it might be not safe. Do not try to encode the received parameters, remove potential failures. Does not use any symbol from any libraries except the dynamic loader library.)
+The major change here is the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it executes a wrapper process `pear` which does all these. The motivation behind this chage is to reduce the complexity of `libear`. (It does not allocate memory during the exec calls, because it might be not safe. It does not try to encode the received parameters, remove potential failures. It does not use any symbol from any libraries except the dynamic loader library.)
 
-The process `pear` is a statically linked executable which supervise the child process. (Static linking is relevant, that ensures that it won't call itself.) It gives more room to implement the following features:
+The process `er` is a statically linked executable which supervises the child process. (Static linking is relevant to ensures that it won't call itself.) It gives more room to implement the following features:
 
 * Can report on process exit status.
 * Statically linked compilers can be recorded.
 * Encoding problems can be solved.
 * Multi threading issues can be solved.
-* Tools which manipulating the `LD_PRELOAD` environment can work.
-* Using compiler wrappers is easy with this, which solves issues on OSX and Windows.
+* Tools which are using the `LD_PRELOAD` environment can also work.
+* Using compiler wrappers is easy with this approach. (It solves issues on OSX and Windows.)
 
 # 2.x Polyglot Bear
 
@@ -45,9 +45,9 @@ Summary:
 * Written in C89 and Python 2.7 and 3.x.
 * Build system: CMake
 
-The major change here is to rewrite the `bear` process in Python. The built in JSON module and the better file system handling modules makes the code slim. It also improves portability.
+The major change here the rewriten the `bear` process in Python language. The built in JSON module and the better file system handling modules make the code slim. It also improves portability.
 
-It also drops the socket connection and uses temporary files instead. Which helps to deal with big builds. But the main drive behind it is: programming bugs for long running builds are not fatal. (The recorded executions are on the file system not in the memory.)
+It also drops the socket connection and uses temporary files instead. It helps to deal with big builds. But the main drive behind it is: programming bugs for long running builds are not fatal. (The recorded executions are on the file system not in the memory.)
 
 # 1.x Bear in C
 
