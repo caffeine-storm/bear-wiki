@@ -4,19 +4,19 @@ Read from bottom up if you want to get full picture how it works. Read normally 
 
 Summary:
 
-* Uses language: rust
-* Uses build system: cargo
+* Written in: rust
+* Build system: cargo
 
-Use ontology format as output. While compilation databases are good for tools which are based on Clang tooling library, found that this is not the only usage scenario. People often use this tool to get insights about their product build process. (Especially when it is complex and the project is big.)
+Bear produces ontology as output. While compilation databases are good for tools which are based on Clang tooling library, found that this is not the only usage scenario. People often use this tool to get insights into their product build process. (Especially when the project is big or complex.)
 
-One of these use cases could be:
+These use cases could be:
 
-* See all executed commands in a project, in order to:
+* To see all executed commands in a project, in order to:
   * Find duplicated tasks.
   * Find where time is spent.
   * Find bugs in the process.
-* Might help to migrate from one build tool to another.
-* Build cross project indexes:
+* To help to migrate from one build tool to another.
+* To build cross project indexes:
   * of symbols defined in projects,
   * to see symbols usages in cross projects.
 
@@ -24,8 +24,8 @@ One of these use cases could be:
 
 Summary:
 
-* Uses C++14 dialect (or C++17) and Python
-* Still uses CMake
+* Written in C++14 dialect (or C++17) and Python
+* Build system: CMake
 
 Major change the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it execute a wrapper process `pear` which does all these. The motivation behind it is to reduce the complexity of `libear`. (Do not allocate memory during the exec calls, because it might be not safe. Do not try to encode the received parameters, remove potential failures. Does not use any symbol from any libraries except the dynamic loader library.)
 
@@ -43,7 +43,7 @@ The process `pear` is a statically linked executable which supervise the child p
 Summary:
 
 * Written in C89 and Python 2.7 and 3.x.
-* Still uses CMake
+* Build system: CMake
 
 The major change here is to rewrite the `bear` process in Python. The built in JSON module and the better file system handling modules makes the code slim. It also improves portability.
 
@@ -54,8 +54,8 @@ It also drops the socket connection and uses temporary files instead. Which help
 Summary:
 
 * Written in C98.
-* Uses CMake.
-* Depends on `libconfig`.
+* Build system: CMake.
+* Dependency: `libconfig`.
 
 The core concept is to use the operating system dynamic loader [preload](https://en.wikipedia.org/wiki/Dynamic_linker#Systems_using_ELF) feature to hijack C function calls. The relevant process execution methods are implemented in a shared library called `libear`. The loading of this library is to modify the default behaviour of the dynamic loader, by setting the `LD_PRELOAD` environment variable to the `libear` library.
 
