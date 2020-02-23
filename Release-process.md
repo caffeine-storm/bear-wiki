@@ -1,4 +1,4 @@
-# Release process
+General info about how this project create new releases. (WIP)
 
 * Project releases are associated with source repository tags.
   * Each release has a unique tag which represents a released version.
