@@ -26,7 +26,7 @@
 
 ## Tasks rating in languages
 
-| Feature              | C/C++ | Rust | Python | `libear` | `wrapper` | `pear` | `bear` |
+| Feature              | C/C++ | Rust | Python | `libexec`| `wrapper` |  `er`  | `bear` |
 | -------------------- | -----:| ----:| ------:| --------:| ---------:| ------:| ------:|
 | comp. dyn. lib       |    ++ |   ++ |      - |        x |           |        |        |
 | comp. static.exe     |    ++ |   ++ |      - |          |           |      x |        |
@@ -38,9 +38,9 @@
 | signal handling      |    ++ |    ? |      + |          |           |      x |      x |
 | temp. read/write     |     + |    + |     ++ |          |           |      x |      x |
 | env. read/write      |     + |    + |     ++ |        x |         x |      x |      x |
-| JSON read/write      |     - |   ++ |     ++ |          |           |      x |      x |
+| JSON read/write      |    ++ |   ++ |     ++ |          |           |      x |      x |
 | RDF read/write       |     - |    + |     ++ |          |           |      x |        |
-| network read/write   |     + |    ? |      - |          |           |      x |      x |
+| network read/write   |     + |    ? |      - |          |         x |      x |      x |
 
 ## Things to consider
 
