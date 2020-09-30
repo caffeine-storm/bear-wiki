@@ -4,8 +4,8 @@ Read from bottom up if you want to get full picture how it works. Read normally 
 
 Summary:
 
-* Written in: rust
-* Build system: cargo
+* Written in: ???
+* Build system: ???
 
 Bear produces ontology as output. While compilation databases are good for tools which are based on Clang tooling library, found that this is not the only usage scenario. People often use this tool to get insights into their product build process. (Especially when the project is big or complex.)
 
@@ -24,12 +24,12 @@ These use cases could be:
 
 Summary:
 
-* Written in C++14 dialect (or C++17) and Python
+* Written in C++17 dialect
 * Build system: CMake
 
-The major change here is the `libear` library does not send the report itself, and does not do anything with the environment variables. Instead, it executes a wrapper process `pear` which does all these. The motivation behind this chage is to reduce the complexity of `libear`. (It does not allocate memory during the exec calls, because it might be not safe. It does not try to encode the received parameters, remove potential failures. It does not use any symbol from any libraries except the dynamic loader library.)
+The major change here is the `libexec` library does not send the report itself, and does not do anything with the environment variables. Instead, it executes a wrapper process `er` which does all these. The motivation behind this change is to reduce the complexity of `libexec`. (It does not allocate memory during the exec calls, because it might be not safe. It does not try to encode the received parameters, remove potential failures. It does not use any symbol from any libraries except the dynamic loader library.)
 
-The process `er` is a statically linked executable which supervises the child process. (Static linking is relevant to ensures that it won't call itself.) It gives more room to implement the following features:
+The process `er` supervises the child process. It gives more room to implement the following features:
 
 * Can report on process exit status.
 * Statically linked compilers can be recorded.
