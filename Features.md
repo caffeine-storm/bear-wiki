@@ -9,7 +9,7 @@ The problem with the single string, that it needs to be shell escaped. This is n
 While early versions were emitting the `command`, since version 2.x it does only the `arguments`.
 
 * Both format needs to be read. (since 2.3.0)
-* Both format can be written. (plan ...)
+* Both format can be written. (since 3.0.0)
 
 ## Output attribute (JSON CDB)
 
@@ -66,7 +66,7 @@ Not all compilation entries are relvant. Users might want to exclude certain sou
 Some tools are sensitive how the compiler is named in the JSON compilation database.
 
 * Use the current compiler as is (since 2.3.12)
-* Use the current compiler with full path (planed ...)
+* Use the current compiler with full path (since 3.0.0)
 * Substitute the recognized compiler with a generic one (planed ...)
 
 ## Paths (JSON CDB)
@@ -94,7 +94,7 @@ Some compiler call might look linking, but it might involve compilations too.
 
 The interception phase collects all command which it was able to intercept into a temporary folder. This might be problematic for some use cases. Alternatively it can use IPC to send this information to the supervisor process. (This is how before version 0.5 was.)
 
-* Avoid to use not specified resources (planed ...)
+* Avoid to use not specified resources (planed 3.0.0)
 
 ## Support multilib builds
 
@@ -118,7 +118,7 @@ Have seen PR with MinGW (to use the same library preload trick), but this can be
 
 Newer version of MacOS is locked down with security features. Might require to re-think the intercept mode to satisfy this.
 
-* Support MacOS (partially since 1.0, planed ...)
+* Support MacOS (partially since 1.0, with compiler wrappers 3.0.0)
 
 ## Support Fortran compilers (JSON CDB)
 
