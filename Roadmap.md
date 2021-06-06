@@ -27,9 +27,9 @@ Summary:
 * Written in C++17 dialect
 * Build system: CMake
 
-The major change here is the `libexec` library does not send the report itself, and does not do anything with the environment variables. Instead, it executes a wrapper process `er` which does all these. The motivation behind this change is to reduce the complexity of `libexec`. (It does not allocate memory during the exec calls, because it might be not safe. It does not try to encode the received parameters, remove potential failures. It does not use any symbol from any libraries except the dynamic loader library.)
+The major change here is the `libexec` library does not send the report itself, and does not do anything with the environment variables. Instead, it executes a `wrapper` process which does all these. The motivation behind this change is to reduce the complexity of `libexec`. (It does not allocate memory during the exec calls, because it might be not safe. It does not try to encode the received parameters, remove potential failures. It does not use any symbol from any libraries except the dynamic loader library.)
 
-The process `er` supervises the child process. It gives more room to implement the following features:
+The process `wrapper` supervises the child process. It gives more room to implement the following features:
 
 * Can report on process exit status.
 * Statically linked compilers can be recorded.
