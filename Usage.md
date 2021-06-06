@@ -2,7 +2,7 @@
 
 After installation the usage is like this:
 
-    bear <your-build-command>
+    bear -- <your-build-command>
 
 The output file called `compile_commands.json` is saved in the current directory.
 
@@ -19,7 +19,7 @@ It implies if your build breaks and the build process stops. The output will con
 
 # Cross Compilers
 
-Cross compilers should work with Bear. If Bear works with a native compiler then it should work with a cross compiler too. The only catch is that Bear does not know the compiler name to recognize it, so you need to explicitly pass the compiler names. (See `--use-cc`, `--use-c++` or `--use-only` flags in the help or in the manual page for more.)
+Cross compilers should work with Bear. If Bear works with a native compiler then it should work with a cross compiler too. The only catch is that Bear does not know the compiler name to recognize it, so you need to configure the compiler names. (Read about the configuration file in `man citnames`.)
 
 # Multilib Issues
 
@@ -27,7 +27,7 @@ Multilib is one of the solutions allowing users to run applications built for va
 
 For OSX this is not an issue. The build commands from previous section will work, Bear will intercept compiler calls for 32-bit and 64-bit applications.
 
-For Linux, a small tune is needed at build time. Need to compile `libear.so`/`libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. And replace the `libear.so`/`libexec.so` path default value with a single path, that matches both. (The match can be achieved by
+For Linux, a small tune is needed at build time. Need to compile `libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. And replace the `libexec.so` path default value with a single path, that matches both. (The match can be achieved by
 the `$LIB` token expansion from the dynamic loader. See `man ld.so` for more.)
 
 Debian derivatives are using `lib/i386-linux-gnu` and `lib/x86_64-linux-gnu`, while many other distributions are simple `lib` and `lib64` directories. Here comes an example build script to install a multilib capable Bear. It will install Bear under `/opt/bear` on a non Debian system.
@@ -70,18 +70,9 @@ Supported. (Check for distribution [package](https://www.freshports.org/devel/be
 
 Supported. (Check for distribution [package](https://formulae.brew.sh/formula/bear).)
 
-### SIP
-
-Security extension/modes on latest OSX releases prevent the dynamic linker to preload libraries. This case Bear behaves normally, but the result compilation database will be empty.
-
-To check is SIP enabled run: `csrutil status | grep 'System Integrity Protection'`
-
-* Workaround could be to disable the security feature while running Bear. This might involve reboot of your computer, so might be heavy workaround.
-* Another option if the build tool is not from the official XCode, but installed from some other sources. (eg.: instead of using the system `make` command, try to install `gmake` from `brew`.)
-
 ## Windows
 
-Will be supported in 3.0+ version.
+Not yet supported. (Contact me if you want to develop this.)
 
 ## AIX
 
@@ -116,4 +107,4 @@ for that. Just pass `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON` flag when you call
 
 Bear uses dynamic linker to work. Which implies if the build tool is static binary, so the dynamic linker is not involved, so Bear intercept logic is not called, so the executions are not logged and it results an empty output.
 
-* Workaround could be to use a non static build tool. (The examples I've got was: using the system `sh` to call the compiler makes empty output. While install `bash` from package manager fix the issue.)
+Use `--force-wrapper` to use compiler wrappers, which will work with static build tools. But requires the build system respects the `CC` and `CXX` environment variables to name the compiler of the project.
