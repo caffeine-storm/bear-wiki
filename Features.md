@@ -108,6 +108,13 @@ Although it's not a common pattern, but some build is using non ascii characters
 
 * Support multiple character encoding (partial since 2.3.0, planed ...)
 
+## Support dry run
+
+When the project size is big, the project build is probably slow. To reduce the time is spent with the compilation database creation, there are several possibilities. One technique is commonly called "dry run", when the build is not executed, but the plan is printed to the console. If such output can be provided by the build system, Bear should be able to parse that output and generate a compilation database. The other way to shorten the time is when the compiler wrappers are not calling the real compiler, but fake the execution with an empty output file.
+
+* Support "dry run" for build systems (planned ...)
+* Support "fake run" for build systems (planned ...)
+
 ## Support MS Windows
 
 Have seen PR with MinGW (to use the same library preload trick), but this can be extended for other "normal" users too.
