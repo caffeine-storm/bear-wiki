@@ -16,8 +16,3 @@ The primary tool of this project is also called `bear`, which generates [JSON co
 * [Features](https://github.com/rizsotto/Bear/wiki/Features) is a summary of the existing and planned features.
 * Contribution guidelines
 * [Release process](https://github.com/rizsotto/Bear/wiki/Release-process)
-
-## Developer pages:
-
-* Research page about the [programming language](https://github.com/rizsotto/Bear/wiki/Which-language%3F) to implement the tools.
-* Research page about to use a [config file](https://github.com/rizsotto/Bear/wiki/Config-file) for `bear`.
