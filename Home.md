@@ -9,6 +9,7 @@ The primary tool of this project is also called `bear`, which generates [JSON co
 * [Compiler wrappers](https://github.com/rizsotto/Bear/wiki/Usage#compiler-wrappers) (ccache, distcc, mpi, etc..)
 * [OS specific notes](https://github.com/rizsotto/Bear/wiki/Usage#os-support)
 * [Build tool specific notes](https://github.com/rizsotto/Bear/wiki/Usage#build-tools)
+* [Troubleshooting](https://github.com/rizsotto/Bear/wiki/Troubleshooting)
 
 ## Project pages:
 
