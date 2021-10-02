@@ -8,6 +8,16 @@ The output file called `compile_commands.json` is saved in the current directory
 
 For more options you can check the man page or pass `--help` parameter.
 
+## Example
+
+Suppose you have a `Makefile` and compile your project with the following command:
+
+    make -j4
+
+Then you'd just need to invoke bear as follows:
+
+    bear -- make -j4
+
 ## Limitations
 
 Bear uses operating system features to intercept process executions during the build process. Which means it is unaware about the build system. It records only those executions which it were happen during the build process. (It does not read the build description (`Makefile`, `CMakeLists.txt`, etc..), but it intercepts the commands were executed.)
