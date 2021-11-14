@@ -35,12 +35,23 @@ Cross compilers should work with Bear. If Bear works with a native compiler then
 
 Multilib is one of the solutions allowing users to run applications built for various application binary interfaces (ABIs) of the same architecture. The most common use of multilib is to run 32-bit applications on 64-bit kernel.
 
-For OS-es which are using the _preload_ mode to intercept the executed commands, a small tune is needed. Need to compile `libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. The `libexec.so` path value has to be a single path, that matches both. (The match can be achieved by the `$LIB` token expansion from the dynamic loader. See `man ld.so` for more.)
+For OS-es which are using the _preload_ mode to intercept the executed commands, a small tune is needed. Need to compile `libexec.so` library for 32-bit and for 64-bit too. Then install these libraries to the OS preferred multilib directories. The `libexec.so` path value has to be a single path, that matches both. (The match can be achieved by the `$LIB` token expansion from the dynamic loader. See `man ld.so` for more.) The `INSTALL.md` file has a section which explains the how the build command should look like to enable the multilib build. Pay attention for the section, which describes the value of `CMAKE_INSTALL_LIBDIR`.
 
-Debian derivatives are using `lib/i386-linux-gnu` and `lib/x86_64-linux-gnu`, while many other distributions are simple `lib` and `lib64` directories. Here comes an example build script to install a multilib capable Bear. It will install Bear under `/opt/bear` on a non Debian system.
+First, build and install the project for a 32 bit machine:
 
-    (cd ~/build32; cmake "$BEAR_SOURCE_DIR" -DCMAKE_C_COMPILER_ARG1="-m32" -DCMAKE_INSTALL_LIBDIR=lib/i386-linux-gnu; VERBOSE=1 make install;)
-    (cd ~/build64; cmake "$BEAR_SOURCE_DIR" -DCMAKE_C_COMPILER_ARG1="-m64" -DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu; VERBOSE=1 make install;)
+    cd ~/build32
+    cmake -DCMAKE_C_COMPILER_ARG1="-m32" -DENABLE_MULTILIB=ON -DCMAKE_INSTALL_LIBDIR=lib/i386-linux-gnu "$BEAR_SOURCE_DIR"
+    make all -j8
+    make install
+
+Second, build and install the project for 64 bit machine:
+
+    cd ~/build64;
+    cmake -DCMAKE_C_COMPILER_ARG1="-m64" -DENABLE_MULTILIB=ON -DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu "$BEAR_SOURCE_DIR"
+    make all -j8
+    make install
+
+This way the 64 bit install will overwrite the 32 binaries, but the necessary `libexec.so` will have both the 32 and 64 bit versions, because of the different installation paths.
 
 # Compiler Wrappers
 
