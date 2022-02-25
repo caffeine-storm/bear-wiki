@@ -40,11 +40,14 @@ with Bear.
 
 In case if you are using cross compilers (or not the default `cc`), Bear might miss to recognize that as a compilation step.
 
+Running Bear outside of a Docker command will not work. Because `docker exec ...` is not executing anything, it just sends the command to the `docker` daemon, and that will execute the command. Bear has no access an already running process child processes, can't intercept the executed processes.
+
 **Workarounds**:
 
 - Clean your build (eg.: run `make clean`) and run your build with Bear again.
 - Run the "configure" step with Bear too. Discard its output, and proceed with the build with Bear.
 - In case if you are using non default compilers, you might want to write a configuration file to hint Bear which compilers to recognize.
+- If you are running your build inside a Docker container, run Bear inside the container too.
 
 # The output is missing entries.
 
