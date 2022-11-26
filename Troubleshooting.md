@@ -23,6 +23,20 @@ CMake somehow does not pay attention for this important detail. And it installs 
 - Use an OS package if available. (Packagers are already solved this issue.)
 - Figure out what the `$LIB` expands to on your system (as I've detailed above), and check the `libexec.so` file location.
 
+```
+wrapper: failed with: gRPC call failed: Connection reset by peer
+``` 
+
+```
+wrapper: failed with: gRPC call failed: failed to connect to all addresses
+```
+
+These error messages are coming from the gRPC client, which can be influenced by environment variables. The most probable cause when the HTTP proxy environment variables are presents. (`http_proxy`, `https_proxy`, `all_proxy` and their capitalized versions.)
+
+**Workarounds**:
+
+- Unset the HTTP proxy variables.
+- When unset is not an option, try to set `no_proxy=localhost,127.0.0.1` as environment variable.
 
 # The output is empty
 
