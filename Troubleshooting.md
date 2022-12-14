@@ -1,6 +1,74 @@
 For many of problems, the best way to solve it is to build some understanding how Bear works. This section will help to get familiar with Bear's internals and also advice what to check in certain error cases.
 
-TODO: explain what Bear does
+# How it works?
+
+To build the compilation database, Bear split this work into two major steps:
+
+1. It execute the build and intercepts the executed commands (most likely the compiler calls).
+1. It read the command execution log, and build the final output (deduce the semantic of the commands).
+
+In the current implementation these two steps are implemented in two separate executable, and a third one is calling this two programs one after the other. This 3rd program is called `bear`, and that's what users interact with mostly. The 1st command intercepting program is called `intercept`. The 2nd reasoning program is called `citnames` (it's the word "semantic" just backwards).
+
+Running `bear` with verbose option, you can observe the `intercept` and `citnames` program executions. A set of `-v` flag can trigger the verbose logging:
+
+    $ bear -vvvv -- <build command>
+
+## How intercept works?
+
+Currently there are 2 modes how command interception is possible with this tool:
+
+1. The operating system dynamic linker library preload mechanism.
+1. Interposing compiler wrappers.
+
+Both solutions have some limitations, and a context when it performs better than the other.
+
+### Intercept with dynamic linker preload
+
+Many operating systems are supporting dynamic linking, and many of these [dynamic linker](https://en.wikipedia.org/wiki/Dynamic_linker) supports library preloading. It means that a shared library is loaded first into the memory when a program is executed. The `intercept` program is using it to record the program execution calls. (The preloaded library is implementing the [`exec*` POSIX functions](https://en.wikibooks.org/wiki/C_Programming/POSIX_Reference/unistd.h/exec) and part of the Bear project.)
+
+The `intercept` program is using this mechanism to "hijack" the program executions from the build tool. When your build tool wants to execute a program, it will call one of the `exec*` function. But the preloaded library `exec*` function gets called. And this library will not execute the program the build tool was calling, but will execute another one. This another program is called `wrapper`. When the library executes the `wrapper` command, it passes all context to it.
+
+What the `wrapper` command is doing? Let's discuss it after the compiler wrappers, because that mode is also using it.
+
+### Intercept with interposing compiler wrappers
+
+In this mode, the `intercept` tool is relies on the build tool usage of environment variables. By conventions, build tools are using the following environment variables to control which compiler tools to use for compiling C or C++ sources:
+
+- `CC` for C compiler
+- `CXX` for C++ compiler
+- `AS` for assembler
+- `FC` for fortran compiler
+
+You can read more about this variables [here](https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html).
+
+The idea here, that `intercept` will override these environment variables before calling the build tool. So, the build tool will call the tools that `intercept` was interpose (and not the real compilers). The tool that `intercept` is interposing as compiler is the same `wrapper`. But this time, it can't pass the whole context of the execution (because the execution will be done by the build tool). So, when Bear is installed on a machine, it not only installed the `wrapper` program, but a set of soft links to the `wrapper` program. (In this wrapper directory, you will find all the tools that `intercept` can interpose.)
+
+Now let's see how the `wrapper` program works...
+
+### What the `wrapper` command is doing?
+
+When the `wrapper` command is executed during the build process, it is expected that it will execute a "real" program (like the C compiler, or the linker). So, the `wrapper` needs to produce the same output as the "real" program would do. How does it do?
+
+- It calls the "real" program,
+- or it fakes the "real" program outputs.
+
+In the current implementation, it always calls the real program. How does it know what's the real program is?
+
+When the `wrapper` is called, it has an environment variable that contains an IPC address to talk back to `intercept` program. (In the process tree, the `intercept` process is a parent process of the build process, and the build process is a parent process of the `wrapper` process.) So, what the `wrapper` to `intercept` IPC does?
+
+- It asks for the "real" program,
+- it reports the program execution,
+- and it report the program execution status (when the process terminated).
+
+## Deduce the semantic of the commands
+
+At this stage of the run the `intercept` program is terminated (the build is finished). We have a list of commands (as input) to create the compilation database. The compilation database, has compiler calls as entries. It gives these main tasks for `citnames`:
+
+- recognize compiler calls: it starts with the program name (if it is a known program name like `cc`, `gcc` or `clang`).
+- recognize the compile pass: we only want to see compiler calls which are compiling (not interested when it linking only).
+- filter the argument list: we only want the compilation flags (and not interested linker flags).
+
+When the candidate elements for the compilation database are calculated, it saves them into the JSON compilation database. Since we are supporting "append mode", it takes care to not append elements which are already in.
 
 # The build with and without Bear behaves differently
 
