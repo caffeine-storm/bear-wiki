@@ -105,6 +105,7 @@ These error messages are coming from the gRPC client, which can be influenced by
 
 - Unset the HTTP proxy variables.
 - When unset is not an option, try to set `no_proxy=localhost,127.0.0.1` as environment variable.
+- In WSL2 environment, try to modify a `.wslconfig` file as described here: [#595](/rizsotto/Bear/issues/595)
 
 # The output is empty
 
