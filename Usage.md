@@ -115,6 +115,12 @@ for that. Just pass `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON` flag when you call
 
 ## Statically linked build-tool/compiler
 
-Bear uses dynamic linker to work. Which implies if the build tool is static binary, so the dynamic linker is not involved, so Bear intercept logic is not called, so the executions are not logged and it results an empty output.
+Bear uses the dynamic linker to work. This implies that, if the build tool is a
+static binary, the dynamic linker will not be involved, so Bear's intercept
+logic is not called. The result is that tool executions are not logged and an
+empty output file will be created.
 
-Use `--force-wrapper` to use compiler wrappers, which will work with static build tools. But requires the build system respects the `CC` and `CXX` environment variables to name the compiler of the project.
+To work around this, use `--force-wrapper` to use compiler wrappers so that
+static build tool calls _can_ be detected. Note that this requires the build
+system to respect the `CC` and `CXX` environment variables when selecting the
+compiler.
