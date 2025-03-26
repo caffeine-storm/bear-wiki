@@ -124,3 +124,8 @@ To work around this, use `--force-wrapper` to use compiler wrappers so that
 static build tool calls _can_ be detected. Note that this requires the build
 system to respect the `CC` and `CXX` environment variables when selecting the
 compiler.
+
+When building Go projects on linux, for example, the tooling is built as static
+binaries. So, to use `bear` in projects using
+[cgo](https://pkg.go.dev/cmd/cgo), you'll want to use a command like `bear
+--force-wrapper -- go build .`.
